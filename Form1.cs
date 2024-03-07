@@ -191,6 +191,26 @@ namespace MM4RawSocketAPI
             });
             return _lastError;
         }
+        public MM4RemoteError StartMethodAtStep(string methodName, string step)
+        {
+            ProcessTransaction(new MM4InteropCommand(MM4RemoteCommand.StartMethodAtStep)
+            {
+                ItemName = methodName,
+                ItemValue = step,
+                Password = txtUserOrPassword.Text
+            });
+            return _lastError;
+        }
+        public MM4RemoteError StartMethodSingleStep(string methodName, string step)
+        {
+            ProcessTransaction(new MM4InteropCommand(MM4RemoteCommand.StartMethodSingleStep)
+            {
+                ItemName = methodName,
+                ItemValue = step,
+                Password = txtUserOrPassword.Text
+            });
+            return _lastError;
+        }
         public MM4RemoteError StopMethod()
         {
             ProcessTransaction(new MM4InteropCommand(MM4RemoteCommand.StopMethod)
@@ -360,6 +380,46 @@ namespace MM4RawSocketAPI
             });
             return _lastError;
         }
+        public MM4RemoteError SetExecuteMode(bool on)
+        {
+            ProcessTransaction(new MM4InteropCommand(MM4RemoteCommand.SetExecuteMode)
+            {
+                Password = txtUserOrPassword.Text,
+                ItemValue = on.ToString()
+            });
+            return _lastError;
+        }
+        public MM4RemoteError GetExecuteMode(out bool executeMode)
+        {
+            ProcessTransaction(new MM4InteropCommand(MM4RemoteCommand.GetExecuteMode)
+            {
+                Password = txtUserOrPassword.Text,
+            });
+            {
+                executeMode = bool.Parse(_response.Result);
+            }
+            return _lastError; 
+        }
+        public MM4RemoteError SetWorktablePersistMode(bool on)
+        {
+            ProcessTransaction(new MM4InteropCommand(MM4RemoteCommand.SetWorktablePersistModeOn)
+            {
+                Password = txtUserOrPassword.Text,
+                ItemValue = on.ToString()
+            });
+            return _lastError;
+        }
+        public MM4RemoteError GetWorktablePersistModeOn(out bool persistModeOn)
+        {
+            ProcessTransaction(new MM4InteropCommand(MM4RemoteCommand.GetWorktablePersistModeOn)
+            {
+                Password = txtUserOrPassword.Text,
+            });
+            {
+                persistModeOn = bool.Parse(_response.Result);
+            }
+            return _lastError;
+        }
 
         public void StartNotificationListener()
         {
@@ -457,8 +517,6 @@ namespace MM4RawSocketAPI
                 Thread.Sleep(100);
                 LogMessage("TC: Notification listener stopped");
             }
-
-            SetControlText(btnNotificationListenerControl, "Start Notification Listener");
         }
 
         private void ProcessNotification(string message)
@@ -543,10 +601,12 @@ namespace MM4RawSocketAPI
             if (btnNotificationListenerControl.Text == "Start Notification Listener")
             {
                 StartNotificationListener();
+                btnNotificationListenerControl.Text = "Stop Notification Listener";
             }
             else
             {
                 StopNotificationListener();
+                btnNotificationListenerControl.Text = "Start Notification Listener";
             }
         }
 
@@ -589,6 +649,109 @@ namespace MM4RawSocketAPI
             _lastError = ConnectHardware();
             if (_lastError != MM4RemoteError.OK)
                 LogMessage(_lastError.ToString());
+        }
+
+        private void btnRunMethod_Click(object sender, EventArgs e)
+        {
+            _lastError = StartMethod(txtMethodName.Text);
+            if (_lastError != MM4RemoteError.OK)
+                LogMessage(_lastError.ToString());
+        }
+
+        private void btnStop_Click(object sender, EventArgs e)
+        {
+            _lastError = StopMethod();
+            if (_lastError != MM4RemoteError.OK)
+                LogMessage(_lastError.ToString());
+        }
+
+        private void btnStartMethodAtStep_Click(object sender, EventArgs e)
+        {
+            _lastError = StartMethodAtStep(txtMethodName.Text, txtStepIndex.Text);
+            if (_lastError != MM4RemoteError.OK)
+                LogMessage(_lastError.ToString());
+        }
+
+        private void btnStartMethodSingleStep_Click(object sender, EventArgs e)
+        {
+            _lastError = StartMethodSingleStep(txtMethodName.Text, txtStepIndex.Text);
+            if (_lastError != MM4RemoteError.OK)
+                LogMessage(_lastError.ToString());
+        }
+
+        private void btnSetExecuteMode_Click(object sender, EventArgs e)
+        {
+            _lastError = SetExecuteMode(true);
+            if (_lastError != MM4RemoteError.OK)
+                LogMessage(_lastError.ToString());
+        }
+
+        private void btnSetTestMode_Click(object sender, EventArgs e)
+        {
+            _lastError = SetExecuteMode(false);
+            if (_lastError != MM4RemoteError.OK)
+                LogMessage(_lastError.ToString());
+        }
+
+        private void btnWorktablePersistModeON_Click(object sender, EventArgs e)
+        {
+            _lastError = SetWorktablePersistMode(true);
+            if (_lastError != MM4RemoteError.OK)
+                LogMessage(_lastError.ToString());
+        }
+
+        private void btnWorktablePersistModeOFF_Click(object sender, EventArgs e)
+        {
+            _lastError = SetWorktablePersistMode(false);
+            if (_lastError != MM4RemoteError.OK)
+                LogMessage(_lastError.ToString());
+        }
+
+        private void btnGetExecuteMode_Click(object sender, EventArgs e)
+        {
+            bool executeMode;
+            _lastError = GetExecuteMode(out executeMode);
+            if (_lastError != MM4RemoteError.OK)
+                LogMessage(_lastError.ToString());
+        }
+
+        private void btnGetWorktablePersistModeOn_Click(object sender, EventArgs e)
+        {
+            bool persistMode;
+            _lastError = GetWorktablePersistModeOn(out persistMode);
+            if (_lastError != MM4RemoteError.OK)
+                LogMessage(_lastError.ToString());
+        }
+
+        private void btnInitHardware_Click(object sender, EventArgs e)
+        {
+            _lastError = InitializeHardware();
+            if (_lastError != MM4RemoteError.OK)
+                LogMessage(_lastError.ToString());
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (_listening)
+                StopNotificationListener();
+
+            Properties.Settings.Default.ServerIP = txtIPAddress.Text;
+            Properties.Settings.Default.ServerPort = txtPort.Text;
+            Properties.Settings.Default.ClientIP = txtListenerIPAddress.Text;
+            Properties.Settings.Default.ClientPort = txtListenerPort.Text;
+            Properties.Settings.Default.LastMethod = txtMethodName.Text;
+            Properties.Settings.Default.LastVariable = txtVariableName.Text;
+            Properties.Settings.Default.Save();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            txtIPAddress.Text = Properties.Settings.Default.ServerIP;
+            txtPort.Text = Properties.Settings.Default.ServerPort;
+            txtListenerIPAddress.Text = Properties.Settings.Default.ClientIP;
+            txtListenerPort.Text = Properties.Settings.Default.ClientPort;
+            txtMethodName.Text = Properties.Settings.Default.LastMethod;
+            txtVariableName.Text = Properties.Settings.Default.LastVariable;
         }
     }
 
@@ -691,24 +854,54 @@ namespace MM4RawSocketAPI
     }
 
     public enum MM4RemoteCommand
+    //{
+    //    Unknown = 0,
+    //    StartMethod,
+    //    StopMethod,
+    //    GetMethodState,
+    //    GetLastMethodResult,
+    //    GetApplicationState,
+    //    SetVariable,
+    //    GetVariable,
+    //    VariableWatch,
+    //    MethodWatch,
+    //    GetInput,
+    //    QueryWorktablePlate,
+    //    QueryWorktableBarcode,
+    //    QueryWorktableLocation,
+    //    InitializeHardware,
+    //    ConnectHardware,
+    //    ClearErrors,
+    //    GetExecuteMode,
+    //    SetExecuteMode,
+    //    StartMethodAtStep,
+    //    StartMethodSingleStep
     {
         Unknown = 0,
-        StartMethod,
-        StopMethod,
-        GetMethodState,
-        GetLastMethodResult,
-        GetApplicationState,
-        SetVariable,
-        GetVariable,
-        VariableWatch,
-        MethodWatch,
-        GetInput,
-        QueryWorktablePlate,
-        QueryWorktableBarcode,
-        QueryWorktableLocation,
-        InitializeHardware,
-        ConnectHardware,
-        ClearErrors
+        StartMethod,                        // 1
+        StopMethod,                         // 2
+        GetMethodState,                     // 3
+        GetLastMethodResult,                // 4
+        GetApplicationState,                // 5
+        SetVariable,                        // 6
+        GetVariable,                        // 7
+        VariableWatch,                      // 8
+        MethodWatch,                        // 9
+        GetInput,                           // 10
+        QueryWorktablePlate,                // 11
+        QueryWorktableBarcode,              // 12
+        QueryWorktableLocation,             // 13
+        InitializeHardware,                 // 14
+        ConnectHardware,                    // 15
+        ClearErrors,                        // 16
+        StartScheduledMethod,               // 17
+        GetLastErrorMessage,                // 18
+        GetExecuteMode,                     // 19
+        SetExecuteMode,                     // 20
+        StartMethodAtStep,                  // 21
+        StartMethodSingleStep,              // 22
+        GetWorktablePersistModeOn,          // 23
+        SetWorktablePersistModeOn           // 24
     }
 
     public enum MM4RemoteApplicationState

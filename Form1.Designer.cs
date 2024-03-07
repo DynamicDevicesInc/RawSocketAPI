@@ -53,6 +53,25 @@
             this.btnUnwatchMethod = new System.Windows.Forms.Button();
             this.btnWatchMethod = new System.Windows.Forms.Button();
             this.btnConnectHardware = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtMethodName = new System.Windows.Forms.TextBox();
+            this.btnRunMethod = new System.Windows.Forms.Button();
+            this.btnStop = new System.Windows.Forms.Button();
+            this.btnStartMethodAtStep = new System.Windows.Forms.Button();
+            this.btnStartMethodSingleStep = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txtStepIndex = new System.Windows.Forms.TextBox();
+            this.btnSetExecuteMode = new System.Windows.Forms.Button();
+            this.btnSetTestMode = new System.Windows.Forms.Button();
+            this.btnWorktablePersistModeOFF = new System.Windows.Forms.Button();
+            this.btnWorktablePersistModeON = new System.Windows.Forms.Button();
+            this.btnGetExecuteMode = new System.Windows.Forms.Button();
+            this.btnGetWorktablePersistModeOn = new System.Windows.Forms.Button();
+            this.btnInitHardware = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.grpWorktableMode = new System.Windows.Forms.GroupBox();
+            this.groupBox1.SuspendLayout();
+            this.grpWorktableMode.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtMessages
@@ -60,7 +79,7 @@
             this.txtMessages.Location = new System.Drawing.Point(212, 36);
             this.txtMessages.Multiline = true;
             this.txtMessages.Name = "txtMessages";
-            this.txtMessages.Size = new System.Drawing.Size(582, 390);
+            this.txtMessages.Size = new System.Drawing.Size(582, 386);
             this.txtMessages.TabIndex = 1;
             // 
             // lblMessages
@@ -278,7 +297,7 @@
             // 
             // btnConnectHardware
             // 
-            this.btnConnectHardware.Location = new System.Drawing.Point(24, 403);
+            this.btnConnectHardware.Location = new System.Drawing.Point(23, 433);
             this.btnConnectHardware.Name = "btnConnectHardware";
             this.btnConnectHardware.Size = new System.Drawing.Size(165, 23);
             this.btnConnectHardware.TabIndex = 25;
@@ -286,11 +305,191 @@
             this.btnConnectHardware.UseVisualStyleBackColor = true;
             this.btnConnectHardware.Click += new System.EventHandler(this.btnConnectHardware_Click);
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(218, 433);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(74, 13);
+            this.label8.TabIndex = 27;
+            this.label8.Text = "Method Name";
+            // 
+            // txtMethodName
+            // 
+            this.txtMethodName.Location = new System.Drawing.Point(298, 430);
+            this.txtMethodName.Name = "txtMethodName";
+            this.txtMethodName.Size = new System.Drawing.Size(88, 20);
+            this.txtMethodName.TabIndex = 26;
+            this.txtMethodName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // btnRunMethod
+            // 
+            this.btnRunMethod.Location = new System.Drawing.Point(403, 428);
+            this.btnRunMethod.Name = "btnRunMethod";
+            this.btnRunMethod.Size = new System.Drawing.Size(98, 23);
+            this.btnRunMethod.TabIndex = 28;
+            this.btnRunMethod.Text = "Run Method";
+            this.btnRunMethod.UseVisualStyleBackColor = true;
+            this.btnRunMethod.Click += new System.EventHandler(this.btnRunMethod_Click);
+            // 
+            // btnStop
+            // 
+            this.btnStop.Location = new System.Drawing.Point(507, 428);
+            this.btnStop.Name = "btnStop";
+            this.btnStop.Size = new System.Drawing.Size(98, 23);
+            this.btnStop.TabIndex = 29;
+            this.btnStop.Text = "Stop";
+            this.btnStop.UseVisualStyleBackColor = true;
+            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
+            // 
+            // btnStartMethodAtStep
+            // 
+            this.btnStartMethodAtStep.Location = new System.Drawing.Point(403, 457);
+            this.btnStartMethodAtStep.Name = "btnStartMethodAtStep";
+            this.btnStartMethodAtStep.Size = new System.Drawing.Size(98, 38);
+            this.btnStartMethodAtStep.TabIndex = 30;
+            this.btnStartMethodAtStep.Text = "Start at Step (Jump)";
+            this.btnStartMethodAtStep.UseVisualStyleBackColor = true;
+            this.btnStartMethodAtStep.Click += new System.EventHandler(this.btnStartMethodAtStep_Click);
+            // 
+            // btnStartMethodSingleStep
+            // 
+            this.btnStartMethodSingleStep.Location = new System.Drawing.Point(507, 457);
+            this.btnStartMethodSingleStep.Name = "btnStartMethodSingleStep";
+            this.btnStartMethodSingleStep.Size = new System.Drawing.Size(98, 38);
+            this.btnStartMethodSingleStep.TabIndex = 31;
+            this.btnStartMethodSingleStep.Text = "Run a Single Step (Step)";
+            this.btnStartMethodSingleStep.UseVisualStyleBackColor = true;
+            this.btnStartMethodSingleStep.Click += new System.EventHandler(this.btnStartMethodSingleStep_Click);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(273, 470);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(69, 13);
+            this.label9.TabIndex = 33;
+            this.label9.Text = "Step Number";
+            // 
+            // txtStepIndex
+            // 
+            this.txtStepIndex.Location = new System.Drawing.Point(347, 467);
+            this.txtStepIndex.Name = "txtStepIndex";
+            this.txtStepIndex.Size = new System.Drawing.Size(39, 20);
+            this.txtStepIndex.TabIndex = 32;
+            this.txtStepIndex.Text = "0";
+            this.txtStepIndex.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // btnSetExecuteMode
+            // 
+            this.btnSetExecuteMode.Location = new System.Drawing.Point(8, 22);
+            this.btnSetExecuteMode.Name = "btnSetExecuteMode";
+            this.btnSetExecuteMode.Size = new System.Drawing.Size(115, 23);
+            this.btnSetExecuteMode.TabIndex = 34;
+            this.btnSetExecuteMode.Text = "To Execute Mode";
+            this.btnSetExecuteMode.UseVisualStyleBackColor = true;
+            this.btnSetExecuteMode.Click += new System.EventHandler(this.btnSetExecuteMode_Click);
+            // 
+            // btnSetTestMode
+            // 
+            this.btnSetTestMode.Location = new System.Drawing.Point(8, 51);
+            this.btnSetTestMode.Name = "btnSetTestMode";
+            this.btnSetTestMode.Size = new System.Drawing.Size(115, 23);
+            this.btnSetTestMode.TabIndex = 35;
+            this.btnSetTestMode.Text = "To Test Mode";
+            this.btnSetTestMode.UseVisualStyleBackColor = true;
+            this.btnSetTestMode.Click += new System.EventHandler(this.btnSetTestMode_Click);
+            // 
+            // btnWorktablePersistModeOFF
+            // 
+            this.btnWorktablePersistModeOFF.Location = new System.Drawing.Point(8, 51);
+            this.btnWorktablePersistModeOFF.Name = "btnWorktablePersistModeOFF";
+            this.btnWorktablePersistModeOFF.Size = new System.Drawing.Size(115, 23);
+            this.btnWorktablePersistModeOFF.TabIndex = 37;
+            this.btnWorktablePersistModeOFF.Text = "To Reset Mode";
+            this.btnWorktablePersistModeOFF.UseVisualStyleBackColor = true;
+            this.btnWorktablePersistModeOFF.Click += new System.EventHandler(this.btnWorktablePersistModeOFF_Click);
+            // 
+            // btnWorktablePersistModeON
+            // 
+            this.btnWorktablePersistModeON.Location = new System.Drawing.Point(8, 22);
+            this.btnWorktablePersistModeON.Name = "btnWorktablePersistModeON";
+            this.btnWorktablePersistModeON.Size = new System.Drawing.Size(115, 23);
+            this.btnWorktablePersistModeON.TabIndex = 36;
+            this.btnWorktablePersistModeON.Text = "To Persist Mode";
+            this.btnWorktablePersistModeON.UseVisualStyleBackColor = true;
+            this.btnWorktablePersistModeON.Click += new System.EventHandler(this.btnWorktablePersistModeON_Click);
+            // 
+            // btnGetExecuteMode
+            // 
+            this.btnGetExecuteMode.Location = new System.Drawing.Point(129, 37);
+            this.btnGetExecuteMode.Name = "btnGetExecuteMode";
+            this.btnGetExecuteMode.Size = new System.Drawing.Size(35, 23);
+            this.btnGetExecuteMode.TabIndex = 38;
+            this.btnGetExecuteMode.Text = "Get";
+            this.btnGetExecuteMode.UseVisualStyleBackColor = true;
+            this.btnGetExecuteMode.Click += new System.EventHandler(this.btnGetExecuteMode_Click);
+            // 
+            // btnGetWorktablePersistModeOn
+            // 
+            this.btnGetWorktablePersistModeOn.Location = new System.Drawing.Point(129, 37);
+            this.btnGetWorktablePersistModeOn.Name = "btnGetWorktablePersistModeOn";
+            this.btnGetWorktablePersistModeOn.Size = new System.Drawing.Size(35, 23);
+            this.btnGetWorktablePersistModeOn.TabIndex = 39;
+            this.btnGetWorktablePersistModeOn.Text = "Get";
+            this.btnGetWorktablePersistModeOn.UseVisualStyleBackColor = true;
+            this.btnGetWorktablePersistModeOn.Click += new System.EventHandler(this.btnGetWorktablePersistModeOn_Click);
+            // 
+            // btnInitHardware
+            // 
+            this.btnInitHardware.Location = new System.Drawing.Point(23, 403);
+            this.btnInitHardware.Name = "btnInitHardware";
+            this.btnInitHardware.Size = new System.Drawing.Size(166, 23);
+            this.btnInitHardware.TabIndex = 40;
+            this.btnInitHardware.Text = "Initialize Hardware";
+            this.btnInitHardware.UseVisualStyleBackColor = true;
+            this.btnInitHardware.Click += new System.EventHandler(this.btnInitHardware_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.btnSetExecuteMode);
+            this.groupBox1.Controls.Add(this.btnSetTestMode);
+            this.groupBox1.Controls.Add(this.btnGetExecuteMode);
+            this.groupBox1.Location = new System.Drawing.Point(23, 470);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(173, 84);
+            this.groupBox1.TabIndex = 41;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Execution Mode";
+            // 
+            // grpWorktableMode
+            // 
+            this.grpWorktableMode.Controls.Add(this.btnWorktablePersistModeON);
+            this.grpWorktableMode.Controls.Add(this.btnWorktablePersistModeOFF);
+            this.grpWorktableMode.Controls.Add(this.btnGetWorktablePersistModeOn);
+            this.grpWorktableMode.Location = new System.Drawing.Point(623, 433);
+            this.grpWorktableMode.Name = "grpWorktableMode";
+            this.grpWorktableMode.Size = new System.Drawing.Size(173, 84);
+            this.grpWorktableMode.TabIndex = 42;
+            this.grpWorktableMode.TabStop = false;
+            this.grpWorktableMode.Text = "Worktable Mode";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(808, 445);
+            this.ClientSize = new System.Drawing.Size(808, 569);
+            this.Controls.Add(this.grpWorktableMode);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.btnInitHardware);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.txtStepIndex);
+            this.Controls.Add(this.btnStartMethodSingleStep);
+            this.Controls.Add(this.btnStartMethodAtStep);
+            this.Controls.Add(this.btnStop);
+            this.Controls.Add(this.btnRunMethod);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.txtMethodName);
             this.Controls.Add(this.btnConnectHardware);
             this.Controls.Add(this.btnUnwatchMethod);
             this.Controls.Add(this.btnWatchMethod);
@@ -318,6 +517,10 @@
             this.Controls.Add(this.txtMessages);
             this.Name = "Form1";
             this.Text = "MM4 Raw Socket API Example";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            this.Load += new System.EventHandler(this.Form1_Load);
+            this.groupBox1.ResumeLayout(false);
+            this.grpWorktableMode.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -350,6 +553,23 @@
         private System.Windows.Forms.Button btnUnwatchMethod;
         private System.Windows.Forms.Button btnWatchMethod;
         private System.Windows.Forms.Button btnConnectHardware;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox txtMethodName;
+        private System.Windows.Forms.Button btnRunMethod;
+        private System.Windows.Forms.Button btnStop;
+        private System.Windows.Forms.Button btnStartMethodAtStep;
+        private System.Windows.Forms.Button btnStartMethodSingleStep;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox txtStepIndex;
+        private System.Windows.Forms.Button btnSetExecuteMode;
+        private System.Windows.Forms.Button btnSetTestMode;
+        private System.Windows.Forms.Button btnWorktablePersistModeOFF;
+        private System.Windows.Forms.Button btnWorktablePersistModeON;
+        private System.Windows.Forms.Button btnGetExecuteMode;
+        private System.Windows.Forms.Button btnGetWorktablePersistModeOn;
+        private System.Windows.Forms.Button btnInitHardware;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox grpWorktableMode;
     }
 }
 
