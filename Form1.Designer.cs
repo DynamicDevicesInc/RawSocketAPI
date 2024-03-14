@@ -70,6 +70,8 @@
             this.btnInitHardware = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.grpWorktableMode = new System.Windows.Forms.GroupBox();
+            this.btnCloseActiveProcessPausedForm = new System.Windows.Forms.Button();
+            this.btnGetProcessPausedFormActive = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.grpWorktableMode.SuspendLayout();
             this.SuspendLayout();
@@ -474,11 +476,33 @@
             this.grpWorktableMode.TabStop = false;
             this.grpWorktableMode.Text = "Worktable Mode";
             // 
+            // btnCloseActiveProcessPausedForm
+            // 
+            this.btnCloseActiveProcessPausedForm.Location = new System.Drawing.Point(507, 501);
+            this.btnCloseActiveProcessPausedForm.Name = "btnCloseActiveProcessPausedForm";
+            this.btnCloseActiveProcessPausedForm.Size = new System.Drawing.Size(98, 53);
+            this.btnCloseActiveProcessPausedForm.TabIndex = 44;
+            this.btnCloseActiveProcessPausedForm.Text = "Close Active ProcessPaused Form";
+            this.btnCloseActiveProcessPausedForm.UseVisualStyleBackColor = true;
+            this.btnCloseActiveProcessPausedForm.Click += new System.EventHandler(this.btnCloseActiveProcessPausedForm_Click);
+            // 
+            // btnGetProcessPausedFormActive
+            // 
+            this.btnGetProcessPausedFormActive.Location = new System.Drawing.Point(403, 501);
+            this.btnGetProcessPausedFormActive.Name = "btnGetProcessPausedFormActive";
+            this.btnGetProcessPausedFormActive.Size = new System.Drawing.Size(98, 53);
+            this.btnGetProcessPausedFormActive.TabIndex = 43;
+            this.btnGetProcessPausedFormActive.Text = "Get Process Paused Form Active";
+            this.btnGetProcessPausedFormActive.UseVisualStyleBackColor = true;
+            this.btnGetProcessPausedFormActive.Click += new System.EventHandler(this.btnGetProcessPausedFormActive_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(808, 569);
+            this.Controls.Add(this.btnCloseActiveProcessPausedForm);
+            this.Controls.Add(this.btnGetProcessPausedFormActive);
             this.Controls.Add(this.grpWorktableMode);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnInitHardware);
@@ -570,6 +594,8 @@
         private System.Windows.Forms.Button btnInitHardware;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox grpWorktableMode;
+        private System.Windows.Forms.Button btnCloseActiveProcessPausedForm;
+        private System.Windows.Forms.Button btnGetProcessPausedFormActive;
     }
 }
 

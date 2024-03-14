@@ -420,6 +420,25 @@ namespace MM4RawSocketAPI
             }
             return _lastError;
         }
+        public MM4RemoteError GetProcessPausedFormActive(out bool active)
+        {
+            ProcessTransaction(new MM4InteropCommand(MM4RemoteCommand.GetProcessPausedFormActive)
+            {
+                Password = txtUserOrPassword.Text,
+            });
+            {
+                active = bool.Parse(_response.Result);
+            }
+            return _lastError;
+        }
+        public MM4RemoteError CloseActiveProcessPausedForm()
+        {
+            ProcessTransaction(new MM4InteropCommand(MM4RemoteCommand.CloseActiveProcessPausedForm)
+            {
+                Password = txtUserOrPassword.Text
+            });
+            return _lastError;
+        }
 
         public void StartNotificationListener()
         {
@@ -471,8 +490,6 @@ namespace MM4RawSocketAPI
                                 // Translate data bytes to a ASCII string.
                                 ProcessNotification(Encoding.ASCII.GetString(bytes, 0, i));
                             }
-                            // Old location // Shutdown and end connection
-                            // Old location client.Close();
                             LogMessage("TC: Notification processed.");
                         }
                     }
@@ -529,7 +546,7 @@ namespace MM4RawSocketAPI
                 {
                     MM4InteropNotification notification = JsonConvert.DeserializeObject<MM4InteropNotification>(message.Trim());
 
-                    if (notification.NotificationType == MM4InteropNotificationType.MethodComplete) // && (MethodCompleteEvent != null))
+                    if (notification.NotificationType == MM4InteropNotificationType.MethodComplete)
                     {
                         LogMessage("NotificationType: MethodComplete");
                         if (!string.IsNullOrEmpty(notification.ItemName))
@@ -537,14 +554,14 @@ namespace MM4RawSocketAPI
                         if (!string.IsNullOrEmpty(notification.ItemValue))
                             LogMessage("ItemValue: " + notification.ItemValue);
                     }
-                    else if (notification.NotificationType == MM4InteropNotificationType.InitializationComplete) // && (InitializationCompleteEvent != null))
+                    else if (notification.NotificationType == MM4InteropNotificationType.InitializationComplete)
                     {
                         LogMessage("NotificationType: InitializationComplete");
                         if (!string.IsNullOrEmpty(notification.ItemName))
                             LogMessage("ItemName: " + notification.ItemName);
                         LogMessage("ItemValue: " + notification.ItemValue);
                     }
-                    else if (notification.NotificationType == MM4InteropNotificationType.ConnectionComplete) // && (ConnectionCompleteEvent != null))
+                    else if (notification.NotificationType == MM4InteropNotificationType.ConnectionComplete)
                     {
                         LogMessage("NotificationType: ConnectionComplete");
                         if (!string.IsNullOrEmpty(notification.ItemName))
@@ -552,9 +569,9 @@ namespace MM4RawSocketAPI
                         if (!string.IsNullOrEmpty(notification.ItemValue))
                             LogMessage("ItemValue: " + notification.ItemValue);
                     }
-                    else if (notification.NotificationType == MM4InteropNotificationType.VariableChanged) // && (VariableChangedEvent != null))
+                    else if (notification.NotificationType == MM4InteropNotificationType.VariableChanged)
                     {
-                        LogMessage("NotificationType: ConnectionComplete");
+                        LogMessage("NotificationType: VariableChanged");
                         if (!string.IsNullOrEmpty(notification.ItemName))
                             LogMessage("ItemName: " + notification.ItemName);
                         if (!string.IsNullOrEmpty(notification.ItemValue))
@@ -753,8 +770,22 @@ namespace MM4RawSocketAPI
             txtMethodName.Text = Properties.Settings.Default.LastMethod;
             txtVariableName.Text = Properties.Settings.Default.LastVariable;
         }
-    }
 
+        private void btnGetProcessPausedFormActive_Click(object sender, EventArgs e)
+        {
+            bool active;
+            _lastError = GetProcessPausedFormActive(out active);
+            if (_lastError != MM4RemoteError.OK)
+                LogMessage(_lastError.ToString());
+        }
+
+        private void btnCloseActiveProcessPausedForm_Click(object sender, EventArgs e)
+        {
+            _lastError = CloseActiveProcessPausedForm();
+            if (_lastError != MM4RemoteError.OK)
+                LogMessage(_lastError.ToString());
+        }
+    }
 
     #region MM4 Classes
 
@@ -854,28 +885,6 @@ namespace MM4RawSocketAPI
     }
 
     public enum MM4RemoteCommand
-    //{
-    //    Unknown = 0,
-    //    StartMethod,
-    //    StopMethod,
-    //    GetMethodState,
-    //    GetLastMethodResult,
-    //    GetApplicationState,
-    //    SetVariable,
-    //    GetVariable,
-    //    VariableWatch,
-    //    MethodWatch,
-    //    GetInput,
-    //    QueryWorktablePlate,
-    //    QueryWorktableBarcode,
-    //    QueryWorktableLocation,
-    //    InitializeHardware,
-    //    ConnectHardware,
-    //    ClearErrors,
-    //    GetExecuteMode,
-    //    SetExecuteMode,
-    //    StartMethodAtStep,
-    //    StartMethodSingleStep
     {
         Unknown = 0,
         StartMethod,                        // 1
@@ -901,7 +910,9 @@ namespace MM4RawSocketAPI
         StartMethodAtStep,                  // 21
         StartMethodSingleStep,              // 22
         GetWorktablePersistModeOn,          // 23
-        SetWorktablePersistModeOn           // 24
+        SetWorktablePersistModeOn,          // 24
+        GetProcessPausedFormActive,         // 25
+        CloseActiveProcessPausedForm        // 26
     }
 
     public enum MM4RemoteApplicationState
