@@ -420,20 +420,33 @@ namespace MM4RawSocketAPI
             }
             return _lastError;
         }
-        public MM4RemoteError GetProcessPausedFormActive(out bool active)
+        public MM4RemoteError GetProcessPausedFormActive(out bool active, out bool continueAvailable, out bool retryAvailable)
         {
             ProcessTransaction(new MM4InteropCommand(MM4RemoteCommand.GetProcessPausedFormActive)
             {
                 Password = txtUserOrPassword.Text,
             });
             {
-                active = bool.Parse(_response.Result);
+                string[] results = _response.Result.Split(';');
+                active = bool.Parse(results[0]);
+                continueAvailable = bool.Parse(results[1]);
+                retryAvailable = bool.Parse(results[2]);
             }
             return _lastError;
         }
-        public MM4RemoteError CloseActiveProcessPausedForm()
+        public MM4RemoteError CloseActiveProcessPausedForm(bool continueOption, bool retryOption)
         {
             ProcessTransaction(new MM4InteropCommand(MM4RemoteCommand.CloseActiveProcessPausedForm)
+            {
+                ItemName = continueOption.ToString(),
+                ItemValue = retryOption.ToString(),
+                Password = txtUserOrPassword.Text
+            });
+            return _lastError;
+        }
+        public MM4RemoteError PauseMethod()
+        {
+            ProcessTransaction(new MM4InteropCommand(MM4RemoteCommand.PauseMethod)
             {
                 Password = txtUserOrPassword.Text
             });
@@ -774,14 +787,35 @@ namespace MM4RawSocketAPI
         private void btnGetProcessPausedFormActive_Click(object sender, EventArgs e)
         {
             bool active;
-            _lastError = GetProcessPausedFormActive(out active);
+            bool continueAvailable;
+            bool retryAvailable;
+            _lastError = GetProcessPausedFormActive(out active, out continueAvailable, out retryAvailable);
             if (_lastError != MM4RemoteError.OK)
                 LogMessage(_lastError.ToString());
+            else
+            {
+                MessageBox.Show("Process Paused Form is " + (active ? "active," : "inactive,") + Environment.NewLine +
+                "Continue Option is " + (continueAvailable ? "available, " : "not available,") + Environment.NewLine +
+                "Retry Option is " + (continueAvailable ? "available. " : "not available."));
+
+                btnCloseActiveProcessPausedForm.Enabled = active;
+                chkContinue.Enabled = continueAvailable;
+                chkRetry.Enabled = retryAvailable;
+            }
         }
 
         private void btnCloseActiveProcessPausedForm_Click(object sender, EventArgs e)
         {
-            _lastError = CloseActiveProcessPausedForm();
+            _lastError = CloseActiveProcessPausedForm((chkContinue.Enabled & chkContinue.Checked), (chkRetry.Enabled & chkRetry.Checked));
+            if (_lastError != MM4RemoteError.OK)
+                LogMessage(_lastError.ToString());
+
+            btnCloseActiveProcessPausedForm.Enabled = chkContinue.Enabled = chkRetry.Enabled = false;
+        }
+
+        private void btnPause_Click(object sender, EventArgs e)
+        {
+            _lastError = PauseMethod();
             if (_lastError != MM4RemoteError.OK)
                 LogMessage(_lastError.ToString());
         }
@@ -912,7 +946,8 @@ namespace MM4RawSocketAPI
         GetWorktablePersistModeOn,          // 23
         SetWorktablePersistModeOn,          // 24
         GetProcessPausedFormActive,         // 25
-        CloseActiveProcessPausedForm        // 26
+        CloseActiveProcessPausedForm,       // 26
+        PauseMethod                         // 27
     }
 
     public enum MM4RemoteApplicationState

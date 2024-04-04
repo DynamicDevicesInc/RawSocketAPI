@@ -72,6 +72,9 @@
             this.grpWorktableMode = new System.Windows.Forms.GroupBox();
             this.btnCloseActiveProcessPausedForm = new System.Windows.Forms.Button();
             this.btnGetProcessPausedFormActive = new System.Windows.Forms.Button();
+            this.chkRetry = new System.Windows.Forms.CheckBox();
+            this.chkContinue = new System.Windows.Forms.CheckBox();
+            this.btnPause = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.grpWorktableMode.SuspendLayout();
             this.SuspendLayout();
@@ -478,9 +481,10 @@
             // 
             // btnCloseActiveProcessPausedForm
             // 
-            this.btnCloseActiveProcessPausedForm.Location = new System.Drawing.Point(507, 501);
+            this.btnCloseActiveProcessPausedForm.Enabled = false;
+            this.btnCloseActiveProcessPausedForm.Location = new System.Drawing.Point(308, 501);
             this.btnCloseActiveProcessPausedForm.Name = "btnCloseActiveProcessPausedForm";
-            this.btnCloseActiveProcessPausedForm.Size = new System.Drawing.Size(98, 53);
+            this.btnCloseActiveProcessPausedForm.Size = new System.Drawing.Size(90, 53);
             this.btnCloseActiveProcessPausedForm.TabIndex = 44;
             this.btnCloseActiveProcessPausedForm.Text = "Close Active ProcessPaused Form";
             this.btnCloseActiveProcessPausedForm.UseVisualStyleBackColor = true;
@@ -488,19 +492,54 @@
             // 
             // btnGetProcessPausedFormActive
             // 
-            this.btnGetProcessPausedFormActive.Location = new System.Drawing.Point(403, 501);
+            this.btnGetProcessPausedFormActive.Location = new System.Drawing.Point(212, 501);
             this.btnGetProcessPausedFormActive.Name = "btnGetProcessPausedFormActive";
-            this.btnGetProcessPausedFormActive.Size = new System.Drawing.Size(98, 53);
+            this.btnGetProcessPausedFormActive.Size = new System.Drawing.Size(90, 53);
             this.btnGetProcessPausedFormActive.TabIndex = 43;
             this.btnGetProcessPausedFormActive.Text = "Get Process Paused Form Active";
             this.btnGetProcessPausedFormActive.UseVisualStyleBackColor = true;
             this.btnGetProcessPausedFormActive.Click += new System.EventHandler(this.btnGetProcessPausedFormActive_Click);
+            // 
+            // chkRetry
+            // 
+            this.chkRetry.AutoSize = true;
+            this.chkRetry.Enabled = false;
+            this.chkRetry.Location = new System.Drawing.Point(407, 533);
+            this.chkRetry.Name = "chkRetry";
+            this.chkRetry.Size = new System.Drawing.Size(51, 17);
+            this.chkRetry.TabIndex = 48;
+            this.chkRetry.Text = "Retry";
+            this.chkRetry.UseVisualStyleBackColor = true;
+            // 
+            // chkContinue
+            // 
+            this.chkContinue.AutoSize = true;
+            this.chkContinue.Enabled = false;
+            this.chkContinue.Location = new System.Drawing.Point(407, 511);
+            this.chkContinue.Name = "chkContinue";
+            this.chkContinue.Size = new System.Drawing.Size(68, 17);
+            this.chkContinue.TabIndex = 47;
+            this.chkContinue.Text = "Continue";
+            this.chkContinue.UseVisualStyleBackColor = true;
+            // 
+            // btnPause
+            // 
+            this.btnPause.Location = new System.Drawing.Point(507, 501);
+            this.btnPause.Name = "btnPause";
+            this.btnPause.Size = new System.Drawing.Size(98, 23);
+            this.btnPause.TabIndex = 49;
+            this.btnPause.Text = "Pause";
+            this.btnPause.UseVisualStyleBackColor = true;
+            this.btnPause.Click += new System.EventHandler(this.btnPause_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(808, 569);
+            this.Controls.Add(this.btnPause);
+            this.Controls.Add(this.chkRetry);
+            this.Controls.Add(this.chkContinue);
             this.Controls.Add(this.btnCloseActiveProcessPausedForm);
             this.Controls.Add(this.btnGetProcessPausedFormActive);
             this.Controls.Add(this.grpWorktableMode);
@@ -596,6 +635,9 @@
         private System.Windows.Forms.GroupBox grpWorktableMode;
         private System.Windows.Forms.Button btnCloseActiveProcessPausedForm;
         private System.Windows.Forms.Button btnGetProcessPausedFormActive;
+        private System.Windows.Forms.CheckBox chkRetry;
+        private System.Windows.Forms.CheckBox chkContinue;
+        private System.Windows.Forms.Button btnPause;
     }
 }
 
