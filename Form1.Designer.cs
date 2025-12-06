@@ -75,6 +75,9 @@
             this.chkRetry = new System.Windows.Forms.CheckBox();
             this.chkContinue = new System.Windows.Forms.CheckBox();
             this.btnPause = new System.Windows.Forms.Button();
+            this.btnGetLastErrorMessage = new System.Windows.Forms.Button();
+            this.btnClearError = new System.Windows.Forms.Button();
+            this.btnGetMethodState = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.grpWorktableMode.SuspendLayout();
             this.SuspendLayout();
@@ -84,7 +87,7 @@
             this.txtMessages.Location = new System.Drawing.Point(212, 36);
             this.txtMessages.Multiline = true;
             this.txtMessages.Name = "txtMessages";
-            this.txtMessages.Size = new System.Drawing.Size(582, 386);
+            this.txtMessages.Size = new System.Drawing.Size(582, 408);
             this.txtMessages.TabIndex = 1;
             // 
             // lblMessages
@@ -134,7 +137,7 @@
             // 
             // btnGetApplicationState
             // 
-            this.btnGetApplicationState.Location = new System.Drawing.Point(23, 195);
+            this.btnGetApplicationState.Location = new System.Drawing.Point(22, 188);
             this.btnGetApplicationState.Name = "btnGetApplicationState";
             this.btnGetApplicationState.Size = new System.Drawing.Size(165, 23);
             this.btnGetApplicationState.TabIndex = 7;
@@ -144,7 +147,7 @@
             // 
             // btnGetVariable
             // 
-            this.btnGetVariable.Location = new System.Drawing.Point(23, 224);
+            this.btnGetVariable.Location = new System.Drawing.Point(24, 246);
             this.btnGetVariable.Name = "btnGetVariable";
             this.btnGetVariable.Size = new System.Drawing.Size(80, 23);
             this.btnGetVariable.TabIndex = 8;
@@ -154,7 +157,7 @@
             // 
             // btnSetVariable
             // 
-            this.btnSetVariable.Location = new System.Drawing.Point(108, 224);
+            this.btnSetVariable.Location = new System.Drawing.Point(109, 246);
             this.btnSetVariable.Name = "btnSetVariable";
             this.btnSetVariable.Size = new System.Drawing.Size(80, 23);
             this.btnSetVariable.TabIndex = 9;
@@ -165,7 +168,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(19, 336);
+            this.label3.Location = new System.Drawing.Point(20, 358);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(75, 13);
             this.label3.TabIndex = 13;
@@ -174,7 +177,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(18, 309);
+            this.label4.Location = new System.Drawing.Point(19, 331);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(76, 13);
             this.label4.TabIndex = 12;
@@ -182,7 +185,7 @@
             // 
             // txtVariableValue
             // 
-            this.txtVariableValue.Location = new System.Drawing.Point(100, 333);
+            this.txtVariableValue.Location = new System.Drawing.Point(101, 355);
             this.txtVariableValue.Name = "txtVariableValue";
             this.txtVariableValue.Size = new System.Drawing.Size(88, 20);
             this.txtVariableValue.TabIndex = 11;
@@ -190,7 +193,7 @@
             // 
             // txtVariableName
             // 
-            this.txtVariableName.Location = new System.Drawing.Point(100, 306);
+            this.txtVariableName.Location = new System.Drawing.Point(101, 328);
             this.txtVariableName.Name = "txtVariableName";
             this.txtVariableName.Size = new System.Drawing.Size(88, 20);
             this.txtVariableName.TabIndex = 10;
@@ -216,7 +219,7 @@
             // 
             // btnNotificationListenerControl
             // 
-            this.btnNotificationListenerControl.Location = new System.Drawing.Point(23, 166);
+            this.btnNotificationListenerControl.Location = new System.Drawing.Point(22, 159);
             this.btnNotificationListenerControl.Name = "btnNotificationListenerControl";
             this.btnNotificationListenerControl.Size = new System.Drawing.Size(165, 23);
             this.btnNotificationListenerControl.TabIndex = 16;
@@ -262,7 +265,7 @@
             // 
             // btnWatchVariable
             // 
-            this.btnWatchVariable.Location = new System.Drawing.Point(23, 253);
+            this.btnWatchVariable.Location = new System.Drawing.Point(24, 275);
             this.btnWatchVariable.Name = "btnWatchVariable";
             this.btnWatchVariable.Size = new System.Drawing.Size(80, 38);
             this.btnWatchVariable.TabIndex = 21;
@@ -272,7 +275,7 @@
             // 
             // btnUnwatchVariable
             // 
-            this.btnUnwatchVariable.Location = new System.Drawing.Point(109, 253);
+            this.btnUnwatchVariable.Location = new System.Drawing.Point(110, 275);
             this.btnUnwatchVariable.Name = "btnUnwatchVariable";
             this.btnUnwatchVariable.Size = new System.Drawing.Size(80, 38);
             this.btnUnwatchVariable.TabIndex = 22;
@@ -282,7 +285,7 @@
             // 
             // btnUnwatchMethod
             // 
-            this.btnUnwatchMethod.Location = new System.Drawing.Point(109, 359);
+            this.btnUnwatchMethod.Location = new System.Drawing.Point(110, 381);
             this.btnUnwatchMethod.Name = "btnUnwatchMethod";
             this.btnUnwatchMethod.Size = new System.Drawing.Size(80, 38);
             this.btnUnwatchMethod.TabIndex = 24;
@@ -292,7 +295,7 @@
             // 
             // btnWatchMethod
             // 
-            this.btnWatchMethod.Location = new System.Drawing.Point(23, 359);
+            this.btnWatchMethod.Location = new System.Drawing.Point(24, 381);
             this.btnWatchMethod.Name = "btnWatchMethod";
             this.btnWatchMethod.Size = new System.Drawing.Size(80, 38);
             this.btnWatchMethod.TabIndex = 23;
@@ -302,7 +305,7 @@
             // 
             // btnConnectHardware
             // 
-            this.btnConnectHardware.Location = new System.Drawing.Point(23, 433);
+            this.btnConnectHardware.Location = new System.Drawing.Point(24, 455);
             this.btnConnectHardware.Name = "btnConnectHardware";
             this.btnConnectHardware.Size = new System.Drawing.Size(165, 23);
             this.btnConnectHardware.TabIndex = 25;
@@ -313,7 +316,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(218, 433);
+            this.label8.Location = new System.Drawing.Point(219, 455);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(74, 13);
             this.label8.TabIndex = 27;
@@ -321,7 +324,7 @@
             // 
             // txtMethodName
             // 
-            this.txtMethodName.Location = new System.Drawing.Point(298, 430);
+            this.txtMethodName.Location = new System.Drawing.Point(299, 452);
             this.txtMethodName.Name = "txtMethodName";
             this.txtMethodName.Size = new System.Drawing.Size(88, 20);
             this.txtMethodName.TabIndex = 26;
@@ -329,7 +332,7 @@
             // 
             // btnRunMethod
             // 
-            this.btnRunMethod.Location = new System.Drawing.Point(403, 428);
+            this.btnRunMethod.Location = new System.Drawing.Point(404, 450);
             this.btnRunMethod.Name = "btnRunMethod";
             this.btnRunMethod.Size = new System.Drawing.Size(98, 23);
             this.btnRunMethod.TabIndex = 28;
@@ -339,7 +342,7 @@
             // 
             // btnStop
             // 
-            this.btnStop.Location = new System.Drawing.Point(507, 428);
+            this.btnStop.Location = new System.Drawing.Point(508, 450);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(98, 23);
             this.btnStop.TabIndex = 29;
@@ -349,7 +352,7 @@
             // 
             // btnStartMethodAtStep
             // 
-            this.btnStartMethodAtStep.Location = new System.Drawing.Point(403, 457);
+            this.btnStartMethodAtStep.Location = new System.Drawing.Point(404, 479);
             this.btnStartMethodAtStep.Name = "btnStartMethodAtStep";
             this.btnStartMethodAtStep.Size = new System.Drawing.Size(98, 38);
             this.btnStartMethodAtStep.TabIndex = 30;
@@ -359,7 +362,7 @@
             // 
             // btnStartMethodSingleStep
             // 
-            this.btnStartMethodSingleStep.Location = new System.Drawing.Point(507, 457);
+            this.btnStartMethodSingleStep.Location = new System.Drawing.Point(508, 479);
             this.btnStartMethodSingleStep.Name = "btnStartMethodSingleStep";
             this.btnStartMethodSingleStep.Size = new System.Drawing.Size(98, 38);
             this.btnStartMethodSingleStep.TabIndex = 31;
@@ -370,7 +373,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(273, 470);
+            this.label9.Location = new System.Drawing.Point(274, 492);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(69, 13);
             this.label9.TabIndex = 33;
@@ -378,7 +381,7 @@
             // 
             // txtStepIndex
             // 
-            this.txtStepIndex.Location = new System.Drawing.Point(347, 467);
+            this.txtStepIndex.Location = new System.Drawing.Point(348, 489);
             this.txtStepIndex.Name = "txtStepIndex";
             this.txtStepIndex.Size = new System.Drawing.Size(39, 20);
             this.txtStepIndex.TabIndex = 32;
@@ -447,7 +450,7 @@
             // 
             // btnInitHardware
             // 
-            this.btnInitHardware.Location = new System.Drawing.Point(23, 403);
+            this.btnInitHardware.Location = new System.Drawing.Point(24, 426);
             this.btnInitHardware.Name = "btnInitHardware";
             this.btnInitHardware.Size = new System.Drawing.Size(166, 23);
             this.btnInitHardware.TabIndex = 40;
@@ -460,7 +463,7 @@
             this.groupBox1.Controls.Add(this.btnSetExecuteMode);
             this.groupBox1.Controls.Add(this.btnSetTestMode);
             this.groupBox1.Controls.Add(this.btnGetExecuteMode);
-            this.groupBox1.Location = new System.Drawing.Point(23, 470);
+            this.groupBox1.Location = new System.Drawing.Point(24, 492);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(173, 84);
             this.groupBox1.TabIndex = 41;
@@ -472,7 +475,7 @@
             this.grpWorktableMode.Controls.Add(this.btnWorktablePersistModeON);
             this.grpWorktableMode.Controls.Add(this.btnWorktablePersistModeOFF);
             this.grpWorktableMode.Controls.Add(this.btnGetWorktablePersistModeOn);
-            this.grpWorktableMode.Location = new System.Drawing.Point(623, 433);
+            this.grpWorktableMode.Location = new System.Drawing.Point(624, 455);
             this.grpWorktableMode.Name = "grpWorktableMode";
             this.grpWorktableMode.Size = new System.Drawing.Size(173, 84);
             this.grpWorktableMode.TabIndex = 42;
@@ -482,7 +485,7 @@
             // btnCloseActiveProcessPausedForm
             // 
             this.btnCloseActiveProcessPausedForm.Enabled = false;
-            this.btnCloseActiveProcessPausedForm.Location = new System.Drawing.Point(308, 501);
+            this.btnCloseActiveProcessPausedForm.Location = new System.Drawing.Point(309, 523);
             this.btnCloseActiveProcessPausedForm.Name = "btnCloseActiveProcessPausedForm";
             this.btnCloseActiveProcessPausedForm.Size = new System.Drawing.Size(90, 53);
             this.btnCloseActiveProcessPausedForm.TabIndex = 44;
@@ -492,7 +495,7 @@
             // 
             // btnGetProcessPausedFormActive
             // 
-            this.btnGetProcessPausedFormActive.Location = new System.Drawing.Point(212, 501);
+            this.btnGetProcessPausedFormActive.Location = new System.Drawing.Point(213, 523);
             this.btnGetProcessPausedFormActive.Name = "btnGetProcessPausedFormActive";
             this.btnGetProcessPausedFormActive.Size = new System.Drawing.Size(90, 53);
             this.btnGetProcessPausedFormActive.TabIndex = 43;
@@ -504,7 +507,7 @@
             // 
             this.chkRetry.AutoSize = true;
             this.chkRetry.Enabled = false;
-            this.chkRetry.Location = new System.Drawing.Point(407, 533);
+            this.chkRetry.Location = new System.Drawing.Point(408, 555);
             this.chkRetry.Name = "chkRetry";
             this.chkRetry.Size = new System.Drawing.Size(51, 17);
             this.chkRetry.TabIndex = 48;
@@ -515,7 +518,7 @@
             // 
             this.chkContinue.AutoSize = true;
             this.chkContinue.Enabled = false;
-            this.chkContinue.Location = new System.Drawing.Point(407, 511);
+            this.chkContinue.Location = new System.Drawing.Point(408, 533);
             this.chkContinue.Name = "chkContinue";
             this.chkContinue.Size = new System.Drawing.Size(68, 17);
             this.chkContinue.TabIndex = 47;
@@ -524,7 +527,7 @@
             // 
             // btnPause
             // 
-            this.btnPause.Location = new System.Drawing.Point(507, 501);
+            this.btnPause.Location = new System.Drawing.Point(508, 523);
             this.btnPause.Name = "btnPause";
             this.btnPause.Size = new System.Drawing.Size(98, 23);
             this.btnPause.TabIndex = 49;
@@ -532,11 +535,44 @@
             this.btnPause.UseVisualStyleBackColor = true;
             this.btnPause.Click += new System.EventHandler(this.btnPause_Click);
             // 
+            // btnGetLastErrorMessage
+            // 
+            this.btnGetLastErrorMessage.Location = new System.Drawing.Point(624, 551);
+            this.btnGetLastErrorMessage.Name = "btnGetLastErrorMessage";
+            this.btnGetLastErrorMessage.Size = new System.Drawing.Size(160, 23);
+            this.btnGetLastErrorMessage.TabIndex = 50;
+            this.btnGetLastErrorMessage.Text = "Get Last Error Messages";
+            this.btnGetLastErrorMessage.UseVisualStyleBackColor = true;
+            this.btnGetLastErrorMessage.Click += new System.EventHandler(this.btnGetLastErrorMessage_Click);
+            // 
+            // btnClearError
+            // 
+            this.btnClearError.Location = new System.Drawing.Point(508, 552);
+            this.btnClearError.Name = "btnClearError";
+            this.btnClearError.Size = new System.Drawing.Size(98, 23);
+            this.btnClearError.TabIndex = 51;
+            this.btnClearError.Text = "Clear Error";
+            this.btnClearError.UseVisualStyleBackColor = true;
+            this.btnClearError.Click += new System.EventHandler(this.btnClearError_Click);
+            // 
+            // btnGetMethodState
+            // 
+            this.btnGetMethodState.Location = new System.Drawing.Point(22, 217);
+            this.btnGetMethodState.Name = "btnGetMethodState";
+            this.btnGetMethodState.Size = new System.Drawing.Size(165, 23);
+            this.btnGetMethodState.TabIndex = 52;
+            this.btnGetMethodState.Text = "Get Method State";
+            this.btnGetMethodState.UseVisualStyleBackColor = true;
+            this.btnGetMethodState.Click += new System.EventHandler(this.btnGetMethodState_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(808, 569);
+            this.ClientSize = new System.Drawing.Size(808, 590);
+            this.Controls.Add(this.btnGetMethodState);
+            this.Controls.Add(this.btnClearError);
+            this.Controls.Add(this.btnGetLastErrorMessage);
             this.Controls.Add(this.btnPause);
             this.Controls.Add(this.chkRetry);
             this.Controls.Add(this.chkContinue);
@@ -638,6 +674,9 @@
         private System.Windows.Forms.CheckBox chkRetry;
         private System.Windows.Forms.CheckBox chkContinue;
         private System.Windows.Forms.Button btnPause;
+        private System.Windows.Forms.Button btnGetLastErrorMessage;
+        private System.Windows.Forms.Button btnClearError;
+        private System.Windows.Forms.Button btnGetMethodState;
     }
 }
 

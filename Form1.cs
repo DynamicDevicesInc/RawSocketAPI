@@ -18,6 +18,7 @@ namespace MM4RawSocketAPI
     {
         private string _lastErrorMsg;
         private MM4RemoteError _lastError;
+        private MM4RemoteError _result;
         private TcpClient _tcpClient;
         private MM4InteropResponse _response = new MM4InteropResponse();
         private int _notificationPort = 0;
@@ -182,6 +183,7 @@ namespace MM4RawSocketAPI
             lastError = _lastErrorMsg;
             return _lastError;
         }
+
         public MM4RemoteError StartMethod(string methodName)
         {
             ProcessTransaction(new MM4InteropCommand(MM4RemoteCommand.StartMethod)
@@ -191,6 +193,7 @@ namespace MM4RawSocketAPI
             });
             return _lastError;
         }
+
         public MM4RemoteError StartMethodAtStep(string methodName, string step)
         {
             ProcessTransaction(new MM4InteropCommand(MM4RemoteCommand.StartMethodAtStep)
@@ -201,6 +204,7 @@ namespace MM4RawSocketAPI
             });
             return _lastError;
         }
+
         public MM4RemoteError StartMethodSingleStep(string methodName, string step)
         {
             ProcessTransaction(new MM4InteropCommand(MM4RemoteCommand.StartMethodSingleStep)
@@ -211,6 +215,7 @@ namespace MM4RawSocketAPI
             });
             return _lastError;
         }
+
         public MM4RemoteError StopMethod()
         {
             ProcessTransaction(new MM4InteropCommand(MM4RemoteCommand.StopMethod)
@@ -219,6 +224,7 @@ namespace MM4RawSocketAPI
             });
             return _lastError;
         }
+
         public MM4RemoteError GetMethodState(out string activeMethodName, out MM4RemoteMethodState methodState)
         {
             activeMethodName = "";
@@ -230,6 +236,7 @@ namespace MM4RawSocketAPI
             }
             return _lastError;
         }
+
         public MM4RemoteError GetLastMethodResult(out string lastMethodName, out MM4RemoteLastMethodResult lastMethodResult)
         {
             lastMethodName = "";
@@ -241,6 +248,7 @@ namespace MM4RawSocketAPI
             }
             return _lastError;
         }
+
         public MM4RemoteError GetApplicationState(out MM4RemoteApplicationState applicationState, out string workspaceName, out string worktableNames)
         {
             applicationState = MM4RemoteApplicationState.None;
@@ -254,6 +262,7 @@ namespace MM4RawSocketAPI
             }
             return _lastError;
         }
+
         public MM4RemoteError SetVariable(string variableName, string value)
         {
             ProcessTransaction(new MM4InteropCommand(MM4RemoteCommand.SetVariable)
@@ -264,6 +273,7 @@ namespace MM4RawSocketAPI
             });
             return _lastError;
         }
+
         public MM4RemoteError GetVariable(string variableName, out string value)
         {
             value = "";
@@ -276,6 +286,7 @@ namespace MM4RawSocketAPI
             }
             return _lastError;
         }
+
         public MM4RemoteError VariableWatch(string variableName, bool watch)
         {
             if (_notificationPort == 0)
@@ -290,6 +301,7 @@ namespace MM4RawSocketAPI
             });
             return _lastError;
         }
+
         public MM4RemoteError MethodWatch(bool watch)
         {
             if (_notificationPort == 0)
@@ -303,6 +315,7 @@ namespace MM4RawSocketAPI
             });
             return _lastError;
         }
+
         public MM4RemoteError GetInput(string inputName, out bool active)
         {
             active = false;
@@ -315,6 +328,7 @@ namespace MM4RawSocketAPI
             }
             return _lastError;
         }
+
         public MM4RemoteError QueryWorktablePlate(string worktableFullName, string plateName, out string queryResults)
         {
             queryResults = "";
@@ -328,6 +342,7 @@ namespace MM4RawSocketAPI
             }
             return _lastError;
         }
+
         public MM4RemoteError QueryWorktableBarcode(string worktableFullName, string barCode, out string queryResults)
         {
             queryResults = "";
@@ -341,6 +356,7 @@ namespace MM4RawSocketAPI
             }
             return _lastError;
         }
+
         public MM4RemoteError QueryWorktableLocation(string worktableFullName, string locationName, out string queryResults)
         {
             queryResults = "";
@@ -354,6 +370,7 @@ namespace MM4RawSocketAPI
             }
             return _lastError;
         }
+
         public MM4RemoteError InitializeHardware()
         {
             ProcessTransaction(new MM4InteropCommand(MM4RemoteCommand.InitializeHardware)
@@ -363,6 +380,7 @@ namespace MM4RawSocketAPI
             });
             return _lastError;
         }
+
         public MM4RemoteError ClearErrors()
         {
             ProcessTransaction(new MM4InteropCommand(MM4RemoteCommand.ClearErrors)
@@ -371,6 +389,7 @@ namespace MM4RawSocketAPI
             });
             return _lastError;
         }
+
         public MM4RemoteError ConnectHardware()
         {
             ProcessTransaction(new MM4InteropCommand(MM4RemoteCommand.ConnectHardware)
@@ -380,6 +399,7 @@ namespace MM4RawSocketAPI
             });
             return _lastError;
         }
+
         public MM4RemoteError SetExecuteMode(bool on)
         {
             ProcessTransaction(new MM4InteropCommand(MM4RemoteCommand.SetExecuteMode)
@@ -389,6 +409,7 @@ namespace MM4RawSocketAPI
             });
             return _lastError;
         }
+
         public MM4RemoteError GetExecuteMode(out bool executeMode)
         {
             ProcessTransaction(new MM4InteropCommand(MM4RemoteCommand.GetExecuteMode)
@@ -400,6 +421,19 @@ namespace MM4RawSocketAPI
             }
             return _lastError; 
         }
+
+        public MM4RemoteError GetLastErrorMessage(out string message)
+        {
+            ProcessTransaction(new MM4InteropCommand(MM4RemoteCommand.GetLastErrorMessage)
+            {
+                Password = txtUserOrPassword.Text
+            });
+            {
+                message = _response.Result;
+            }
+            return _lastError;
+        }
+
         public MM4RemoteError SetWorktablePersistMode(bool on)
         {
             ProcessTransaction(new MM4InteropCommand(MM4RemoteCommand.SetWorktablePersistModeOn)
@@ -409,6 +443,7 @@ namespace MM4RawSocketAPI
             });
             return _lastError;
         }
+
         public MM4RemoteError GetWorktablePersistModeOn(out bool persistModeOn)
         {
             ProcessTransaction(new MM4InteropCommand(MM4RemoteCommand.GetWorktablePersistModeOn)
@@ -420,6 +455,7 @@ namespace MM4RawSocketAPI
             }
             return _lastError;
         }
+
         public MM4RemoteError GetProcessPausedFormActive(out bool active, out bool continueAvailable, out bool retryAvailable)
         {
             ProcessTransaction(new MM4InteropCommand(MM4RemoteCommand.GetProcessPausedFormActive)
@@ -434,6 +470,7 @@ namespace MM4RawSocketAPI
             }
             return _lastError;
         }
+
         public MM4RemoteError CloseActiveProcessPausedForm(bool continueOption, bool retryOption)
         {
             ProcessTransaction(new MM4InteropCommand(MM4RemoteCommand.CloseActiveProcessPausedForm)
@@ -444,6 +481,7 @@ namespace MM4RawSocketAPI
             });
             return _lastError;
         }
+
         public MM4RemoteError PauseMethod()
         {
             ProcessTransaction(new MM4InteropCommand(MM4RemoteCommand.PauseMethod)
@@ -590,6 +628,14 @@ namespace MM4RawSocketAPI
                         if (!string.IsNullOrEmpty(notification.ItemValue))
                             LogMessage("ItemValue: " + notification.ItemValue);
                     }
+                    else if (notification.NotificationType == MM4InteropNotificationType.MethodPausedOrError)
+                    {
+                        LogMessage("NotificationType: MethodPausedOrError");
+                        if (!string.IsNullOrEmpty(notification.ItemName))
+                            LogMessage("ItemName: " + notification.ItemName);
+                        if (!string.IsNullOrEmpty(notification.ItemValue))
+                            LogMessage("ItemValue: " + notification.ItemValue);
+                    }
                 }
                 catch { }
             }
@@ -602,17 +648,24 @@ namespace MM4RawSocketAPI
             GetApplicationState(out currentApplicationState, out foo, out foo);
         }
 
+        private void btnGetMethodState_Click(object sender, EventArgs e)
+        {
+            string foo = "";
+            MM4RemoteMethodState methodState = MM4RemoteMethodState.Unknown;
+            GetMethodState(out foo, out methodState);
+        }
+
         private void btnGetVariable_Click(object sender, EventArgs e)
         {
             if (!String.IsNullOrEmpty(txtVariableName.Text))
             {
                 string value;
                 SetControlText(txtVariableValue, "");
-                _lastError = GetVariable(txtVariableName.Text, out value);
-                if (_lastError == MM4RemoteError.OK)
+                _result = GetVariable(txtVariableName.Text, out value);
+                if (_result == MM4RemoteError.OK)
                     SetControlText(txtVariableValue, value);
                 else
-                    LogMessage(_lastError.ToString());
+                    LogMessage(_result.ToString());
             }
         }
 
@@ -620,9 +673,9 @@ namespace MM4RawSocketAPI
         {
             if (!String.IsNullOrEmpty(txtVariableName.Text) && !String.IsNullOrEmpty(txtVariableValue.Text))
             {
-                _lastError = SetVariable(txtVariableName.Text, txtVariableValue.Text);
-                if (_lastError != MM4RemoteError.OK)
-                    LogMessage(_lastError.ToString());
+                _result = SetVariable(txtVariableName.Text, txtVariableValue.Text);
+                if (_result != MM4RemoteError.OK)
+                    LogMessage(_result.ToString());
             }
         }
 
@@ -644,9 +697,9 @@ namespace MM4RawSocketAPI
         {
             if (!String.IsNullOrEmpty(txtVariableName.Text))
             {
-                _lastError = VariableWatch(txtVariableName.Text, true);
-                if (_lastError != MM4RemoteError.OK)
-                    LogMessage(_lastError.ToString());
+                _result = VariableWatch(txtVariableName.Text, true);
+                if (_result != MM4RemoteError.OK)
+                    LogMessage(_result.ToString());
             }
         }
 
@@ -654,110 +707,110 @@ namespace MM4RawSocketAPI
         {
             if (!String.IsNullOrEmpty(txtVariableName.Text))
             {
-                _lastError = VariableWatch(txtVariableName.Text, false);
-                if (_lastError != MM4RemoteError.OK)
-                    LogMessage(_lastError.ToString());
+                _result = VariableWatch(txtVariableName.Text, false);
+                if (_result != MM4RemoteError.OK)
+                    LogMessage(_result.ToString());
             }
         }
 
         private void btnWatchMethod_Click(object sender, EventArgs e)
         {
-            _lastError = MethodWatch(true);
-            if (_lastError != MM4RemoteError.OK)
-                LogMessage(_lastError.ToString());
+            _result = MethodWatch(true);
+            if (_result != MM4RemoteError.OK)
+                LogMessage(_result.ToString());
         }
 
         private void btnUnwatchMethod_Click(object sender, EventArgs e)
         {
-            _lastError = MethodWatch(false);
-            if (_lastError != MM4RemoteError.OK)
-                LogMessage(_lastError.ToString());
+            _result = MethodWatch(false);
+            if (_result != MM4RemoteError.OK)
+                LogMessage(_result.ToString());
         }
 
         private void btnConnectHardware_Click(object sender, EventArgs e)
         {
-            _lastError = ConnectHardware();
-            if (_lastError != MM4RemoteError.OK)
-                LogMessage(_lastError.ToString());
+            _result = ConnectHardware();
+            if (_result != MM4RemoteError.OK)
+                LogMessage(_result.ToString());
         }
 
         private void btnRunMethod_Click(object sender, EventArgs e)
         {
-            _lastError = StartMethod(txtMethodName.Text);
-            if (_lastError != MM4RemoteError.OK)
-                LogMessage(_lastError.ToString());
+            _result = StartMethod(txtMethodName.Text);
+            if (_result != MM4RemoteError.OK)
+                LogMessage(_result.ToString());
         }
 
         private void btnStop_Click(object sender, EventArgs e)
         {
-            _lastError = StopMethod();
-            if (_lastError != MM4RemoteError.OK)
-                LogMessage(_lastError.ToString());
+            _result = StopMethod();
+            if (_result != MM4RemoteError.OK)
+                LogMessage(_result.ToString());
         }
 
         private void btnStartMethodAtStep_Click(object sender, EventArgs e)
         {
-            _lastError = StartMethodAtStep(txtMethodName.Text, txtStepIndex.Text);
-            if (_lastError != MM4RemoteError.OK)
-                LogMessage(_lastError.ToString());
+            _result = StartMethodAtStep(txtMethodName.Text, txtStepIndex.Text);
+            if (_result != MM4RemoteError.OK)
+                LogMessage(_result.ToString());
         }
 
         private void btnStartMethodSingleStep_Click(object sender, EventArgs e)
         {
-            _lastError = StartMethodSingleStep(txtMethodName.Text, txtStepIndex.Text);
-            if (_lastError != MM4RemoteError.OK)
-                LogMessage(_lastError.ToString());
+            _result = StartMethodSingleStep(txtMethodName.Text, txtStepIndex.Text);
+            if (_result != MM4RemoteError.OK)
+                LogMessage(_result.ToString());
         }
 
         private void btnSetExecuteMode_Click(object sender, EventArgs e)
         {
-            _lastError = SetExecuteMode(true);
-            if (_lastError != MM4RemoteError.OK)
-                LogMessage(_lastError.ToString());
+            _result = SetExecuteMode(true);
+            if (_result != MM4RemoteError.OK)
+                LogMessage(_result.ToString());
         }
 
         private void btnSetTestMode_Click(object sender, EventArgs e)
         {
-            _lastError = SetExecuteMode(false);
-            if (_lastError != MM4RemoteError.OK)
-                LogMessage(_lastError.ToString());
+            _result = SetExecuteMode(false);
+            if (_result != MM4RemoteError.OK)
+                LogMessage(_result.ToString());
         }
 
         private void btnWorktablePersistModeON_Click(object sender, EventArgs e)
         {
-            _lastError = SetWorktablePersistMode(true);
-            if (_lastError != MM4RemoteError.OK)
-                LogMessage(_lastError.ToString());
+            _result = SetWorktablePersistMode(true);
+            if (_result != MM4RemoteError.OK)
+                LogMessage(_result.ToString());
         }
 
         private void btnWorktablePersistModeOFF_Click(object sender, EventArgs e)
         {
-            _lastError = SetWorktablePersistMode(false);
-            if (_lastError != MM4RemoteError.OK)
-                LogMessage(_lastError.ToString());
+            _result = SetWorktablePersistMode(false);
+            if (_result != MM4RemoteError.OK)
+                LogMessage(_result.ToString());
         }
 
         private void btnGetExecuteMode_Click(object sender, EventArgs e)
         {
             bool executeMode;
-            _lastError = GetExecuteMode(out executeMode);
-            if (_lastError != MM4RemoteError.OK)
-                LogMessage(_lastError.ToString());
+            _result = GetExecuteMode(out executeMode);
+            if (_result != MM4RemoteError.OK)
+                LogMessage(_result.ToString());
         }
 
         private void btnGetWorktablePersistModeOn_Click(object sender, EventArgs e)
         {
             bool persistMode;
-            _lastError = GetWorktablePersistModeOn(out persistMode);
-            if (_lastError != MM4RemoteError.OK)
-                LogMessage(_lastError.ToString());
+            _result = GetWorktablePersistModeOn(out persistMode);
+            if (_result != MM4RemoteError.OK)
+                LogMessage(_result.ToString());
         }
 
         private void btnInitHardware_Click(object sender, EventArgs e)
         {
-            _lastError = InitializeHardware();
-            if (_lastError != MM4RemoteError.OK)
-                LogMessage(_lastError.ToString());
+            _result = InitializeHardware();
+            if (_result != MM4RemoteError.OK)
+                LogMessage(_result.ToString());
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -789,9 +842,9 @@ namespace MM4RawSocketAPI
             bool active;
             bool continueAvailable;
             bool retryAvailable;
-            _lastError = GetProcessPausedFormActive(out active, out continueAvailable, out retryAvailable);
-            if (_lastError != MM4RemoteError.OK)
-                LogMessage(_lastError.ToString());
+            _result = GetProcessPausedFormActive(out active, out continueAvailable, out retryAvailable);
+            if (_result != MM4RemoteError.OK)
+                LogMessage(_result.ToString());
             else
             {
                 MessageBox.Show("Process Paused Form is " + (active ? "active," : "inactive,") + Environment.NewLine +
@@ -806,18 +859,31 @@ namespace MM4RawSocketAPI
 
         private void btnCloseActiveProcessPausedForm_Click(object sender, EventArgs e)
         {
-            _lastError = CloseActiveProcessPausedForm((chkContinue.Enabled & chkContinue.Checked), (chkRetry.Enabled & chkRetry.Checked));
-            if (_lastError != MM4RemoteError.OK)
-                LogMessage(_lastError.ToString());
+            _result = CloseActiveProcessPausedForm((chkContinue.Enabled & chkContinue.Checked), (chkRetry.Enabled & chkRetry.Checked));
+            if (_result != MM4RemoteError.OK)
+                LogMessage(_result.ToString());
 
             btnCloseActiveProcessPausedForm.Enabled = chkContinue.Enabled = chkRetry.Enabled = false;
         }
 
         private void btnPause_Click(object sender, EventArgs e)
         {
-            _lastError = PauseMethod();
-            if (_lastError != MM4RemoteError.OK)
-                LogMessage(_lastError.ToString());
+            _result = PauseMethod();
+            if (_result != MM4RemoteError.OK)
+                LogMessage(_result.ToString());
+        }
+
+        private void btnGetLastErrorMessage_Click(object sender, EventArgs e)
+        {
+            _result = GetLastErrorMessage(out _lastErrorMsg);
+            LogMessage(_lastErrorMsg);
+        }
+
+        private void btnClearError_Click(object sender, EventArgs e)
+        {
+            _result = ClearErrors();
+            if (_result != MM4RemoteError.OK)
+                LogMessage(_result.ToString());
         }
     }
 
@@ -829,7 +895,8 @@ namespace MM4RawSocketAPI
         MethodComplete,
         VariableChanged,
         InitializationComplete,
-        ConnectionComplete
+        ConnectionComplete,
+        MethodPausedOrError
     }
 
     public class MM4InteropNotification
@@ -860,7 +927,6 @@ namespace MM4RawSocketAPI
             base(commandType)
         {
         }
-
     }    
 
     public class MM4InteropResponse : MM4InteropHeader
