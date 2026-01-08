@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
-using Newtonsoft.Json;
+using System.Web.Script.Serialization;
 
 namespace MM4RawSocketAPI
 {
@@ -124,7 +124,7 @@ namespace MM4RawSocketAPI
                     LogMessage("TC: Connected");
 
                     // Translate the passed message into ASCII and store it as a Byte array.
-                    string dataString = JsonConvert.SerializeObject(cmd);
+                    string dataString = new JavaScriptSerializer().Serialize(cmd);
                     Byte[] data = System.Text.Encoding.ASCII.GetBytes(dataString);
 
                     // Get a client stream for reading and writing. 
@@ -143,7 +143,7 @@ namespace MM4RawSocketAPI
                         responseData = Encoding.ASCII.GetString(data, 0, bytes).Trim();
 
                         LogMessage("<< " + responseData);
-                        response = JsonConvert.DeserializeObject<MM4InteropResponse>(responseData);
+                        response = new JavaScriptSerializer().Deserialize<MM4InteropResponse>(responseData);
                         // Close everything.
                         stream.Close();
                     }
@@ -419,7 +419,7 @@ namespace MM4RawSocketAPI
             {
                 executeMode = bool.Parse(_response.Result);
             }
-            return _lastError; 
+            return _lastError;
         }
 
         public MM4RemoteError GetLastErrorMessage(out string message)
@@ -570,7 +570,8 @@ namespace MM4RawSocketAPI
                 {
                     LogMessage("TC: Notification listener failed: " + errMsg);
                 }
-            }) { Name = "Notification Listener" }).Start();
+            })
+            { Name = "Notification Listener" }).Start();
         }
 
         public void StopNotificationListener()
@@ -595,7 +596,7 @@ namespace MM4RawSocketAPI
             {
                 try
                 {
-                    MM4InteropNotification notification = JsonConvert.DeserializeObject<MM4InteropNotification>(message.Trim());
+                    MM4InteropNotification notification = new JavaScriptSerializer().Deserialize<MM4InteropNotification>(message.Trim());
 
                     if (notification.NotificationType == MM4InteropNotificationType.MethodComplete)
                     {
@@ -927,7 +928,7 @@ namespace MM4RawSocketAPI
             base(commandType)
         {
         }
-    }    
+    }
 
     public class MM4InteropResponse : MM4InteropHeader
     {
